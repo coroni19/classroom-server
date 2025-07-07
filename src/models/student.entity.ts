@@ -2,20 +2,28 @@ import {
   Model,
   Table,
   Column,
-  NotNull,
   PrimaryKey,
 } from 'sequelize-typescript';
 
-@Table
+@Table({
+  tableName: "students",
+  timestamps: false
+})
 export class Student extends Model {
   @PrimaryKey
-  @Column
+  @Column({
+    field: "student_id"
+  })
   studentId: number;
 
-  @Column
+  @Column({
+    field: "first_name"
+  })
   firstName: string;
 
-  @Column
+  @Column({
+    field: "last_name"
+  })
   lastName: string;
 
   @Column

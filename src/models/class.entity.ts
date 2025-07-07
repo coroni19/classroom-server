@@ -2,19 +2,27 @@ import {
   Model,
   Table,
   Column,
-  NotNull,
   PrimaryKey,
 } from 'sequelize-typescript';
 
-@Table
+@Table({
+  tableName: "classes",
+  timestamps: false
+})
 export class Class extends Model {
   @PrimaryKey
-  @Column
+  @Column({
+    field: "class_id"
+  })
   classId: number;
 
-  @Column
+  @Column({
+    field: "class_name"
+  })
   className: string;
 
-  @Column
+  @Column({
+    field: "max_seats"
+  })
   maxSeats: number;
 }

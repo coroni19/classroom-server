@@ -6,8 +6,8 @@ import {
   PrimaryKey,
   ForeignKey,
 } from 'sequelize-typescript';
-import { Class } from './class.model';
-import { Student } from './student.model';
+import { Class } from './class.entity';
+import { Student } from './student.entity';
 
 @Table({ tableName: 'students_assignments' })
 export class StudentsAssignments extends Model {

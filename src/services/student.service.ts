@@ -1,15 +1,18 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { Student } from 'src/models/student.model';
+import { Injectable, Inject } from '@nestjs/common';
+import { Student } from 'src/models/student.entity';
 
 @Injectable()
 export class StudentService {
   constructor(
-    @InjectModel(Student)
-    private studentModel: typeof Student,
+    @Inject('STUDENT_REPOSITORY')
+    private studentRepository: typeof Student,
   ) {}
 
   async findAll(): Promise<Student[]> {
-    return this.studentModel.findAll();
+    return this.studentRepository.findAll<Student>();
+  }
+
+  async deleteStudent(id: string): Promise<void> {
+    await this.studentRepository.destroy({ where: { student_id: id } });
   }
 }
