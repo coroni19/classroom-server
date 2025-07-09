@@ -9,19 +9,23 @@ import {
 import { Class } from './class.entity';
 import { Student } from './student.entity';
 
-@Table({ tableName: 'students_assignments' })
-export class StudentsAssignments extends Model {
-  @PrimaryKey
+@Table({ tableName: 'assignments', timestamps: false })
+export class Assignment extends Model {
+  // @PrimaryKey
   @ForeignKey(() => Class)
-  @Column
+  @Column({
+    field: 'class_id',
+  })
   classId: number;
 
   @BelongsTo(() => Class)
   class: Class;
 
-  @PrimaryKey
+  // @PrimaryKey
   @ForeignKey(() => Student)
-  @Column
+  @Column({
+    field: 'student_id',
+  })
   studentId: number;
 
   @BelongsTo(() => Student)
