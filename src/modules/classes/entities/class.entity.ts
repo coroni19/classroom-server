@@ -2,17 +2,17 @@ import {
   Model,
   Table,
   Column,
+  HasMany,
   PrimaryKey,
-  BelongsToMany,
 } from 'sequelize-typescript';
-import { Assignment } from './assignments.model';
-import { Student } from './student.entity';
+import { Student } from '../../students/entites/student.entity';
+import { IClassCreationAttributes } from '../interfaces/class.interface';
 
 @Table({
   tableName: 'classes',
   timestamps: false,
 })
-export class Class extends Model {
+export class Class extends Model<Class, IClassCreationAttributes> {
   @PrimaryKey
   @Column({
     field: 'class_id',
@@ -29,6 +29,6 @@ export class Class extends Model {
   })
   maxSeats: number;
 
-  @BelongsToMany(() => Student, () => Assignment)
+  @HasMany(() => Student)
   students: Student[];
 }
