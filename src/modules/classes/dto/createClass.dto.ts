@@ -1,18 +1,22 @@
 import {
+  Min,
   Matches,
   IsNumber,
   IsString,
   MaxLength,
   IsNotEmpty,
 } from 'class-validator';
+
 import {
   NAMES_MAX_LENGTH,
   VALID_STRING_REGEX,
+  MIN_POSITIVE_NUMBER,
 } from 'src/constants/validation.const';
 
 export class CreateClassDto {
   @IsNumber()
   @IsNotEmpty()
+  @Min(MIN_POSITIVE_NUMBER)
   classId: number;
 
   @IsString()
@@ -22,5 +26,6 @@ export class CreateClassDto {
 
   @IsNumber()
   @IsNotEmpty()
+  @Min(MIN_POSITIVE_NUMBER)
   maxSeats: number;
 }

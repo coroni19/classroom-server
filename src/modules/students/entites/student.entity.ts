@@ -7,43 +7,39 @@ import {
   PrimaryKey,
   ForeignKey,
 } from 'sequelize-typescript';
+
 import { Class } from '../../classes/entities/class.entity';
-import { IStudentCreationAttributes } from '../interfaces/student.interface';
+import { IStudentAttributes } from '../interfaces/student.interface';
 
 @Table({
-  tableName: 'students',
   timestamps: false,
+  underscored: true,
+  tableName: 'students',
 })
-export class Student extends Model<Student, IStudentCreationAttributes> {
+export class Student
+  extends Model<IStudentAttributes>
+  implements IStudentAttributes
+{
   @PrimaryKey
-  @Column({
-    field: 'student_id',
-  })
+  @Column({ type: DataType.STRING })
   studentId: string;
 
-  @Column({
-    field: 'first_name',
-  })
+  @Column({ type: DataType.STRING })
   firstName: string;
 
-  @Column({
-    field: 'last_name',
-  })
+  @Column({ type: DataType.STRING })
   lastName: string;
 
-  @Column
+  @Column({ type: DataType.INTEGER })
   age: number;
 
-  @Column
+  @Column({ type: DataType.STRING })
   profession: string;
 
   @ForeignKey(() => Class)
-  @Column({
-    field: 'class_id',
-    type: DataType.NUMBER
-  })
+  @Column({ type: DataType.INTEGER })
   classId: number | null;
 
   @BelongsTo(() => Class)
-  class: Class;
+  class?: Class;
 }

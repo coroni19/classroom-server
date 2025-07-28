@@ -7,10 +7,12 @@ import {
   Delete,
   Controller,
 } from '@nestjs/common';
+
 import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/createStudent.dto';
-import { UpdateClassDto } from '../classes/dto/updateClass.dto';
+import { AssignStduentToClassDto } from './dto/updateStudent.dto';
 import { Student } from 'src/modules/students/entites/student.entity';
+import { PrimaryKeyException } from 'src/exceptions/PrimaryKey.exception';
 
 @Controller('students')
 export class StudentController {
@@ -18,48 +20,55 @@ export class StudentController {
 
   @Get()
   findAll(): Promise<Student[]> {
-    return this.studentService.findAll();
+    try {
+      return this.studentService.findAll();
+    } catch (error) {
+      throw new Error('Something went wrong, cant load students');
+    }
   }
 
   @Delete('/:studentId')
-  async deleteStudent(
-    @Param('studentId') studentId: string,
-  ): Promise<{ message: string }> {
-    await this.studentService.deleteStudent(studentId);
-    return {
-      message: `Student with ID ${studentId} has been deleted successfully`,
-    };
-  }
-
-  @Patch('/unassign/:studentId')
-  async unassignStudentFromClass(
-    @Param('studentId') studentId: string,
-  ): Promise<{ message: string }> {
-    await this.studentService.unassignStudentFronClass(studentId);
-    return {
-      message: `Student with ID ${studentId} has been successfully unassigned`,
-    };
+  async deleteStudent(@Param('studentId') studentId: string) {
+    try {
+      await this.studentService.deleteStudent(studentId);
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Patch('/assign/:studentId')
   async assignClass(
     @Param('studentId') studentId: string,
-    @Body() classId: UpdateClassDto,
-  ): Promise<{ message: string }> {
-
-    await this.studentService.assignClass(studentId, classId.classId!);
-    return {
-      message: `Student with ID ${studentId} has been successfully assigned to class with ID ${classId.classId}`,
-    };
+    @Body() classId: AssignStduentToClassDto,
+  ) {
+    try {
+      await this.studentService.assignClass(studentId, classId.classId);
+    } catch (error) {
+      throw new Error('Something went wrong, cant assign student');
+    }
   }
 
   @Post()
-  async createStudent(
-    @Body() createStudentDto: CreateStudentDto,
-  ): Promise<{ message: string }> {
-    await this.studentService.createStudent(createStudentDto);
-    return {
-      message: 'Student created!',
-    };
+  async createStudent(@Body() createStudentDto: CreateStudentDto) {
+    try {
+      await this.studentService.createStudent(createStudentDto);
+    } catch (error) {
+      if (error.name === 'SequelizeDatabaseError') {
+        throw new PrimaryKeyException(
+          'Student',
+          String(createStudentDto.studentId),
+        );
+      }
+      throw error;
+    }
+  }
+
+  @Patch('/unassign/:studentId')
+  async unassignStudentFromClass(@Param('studentId') studentId: string) {
+    try {
+      await this.studentService.unassignStudentFronClass(studentId);
+    } catch (error) {
+      throw error;
+    }
   }
 }

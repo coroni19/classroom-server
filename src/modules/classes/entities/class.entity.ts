@@ -3,32 +3,29 @@ import {
   Table,
   Column,
   HasMany,
+  DataType,
   PrimaryKey,
 } from 'sequelize-typescript';
+
 import { Student } from '../../students/entites/student.entity';
-import { IClassCreationAttributes } from '../interfaces/class.interface';
+import { IClassAttributes } from '../interfaces/class.interface';
 
 @Table({
-  tableName: 'classes',
   timestamps: false,
+  underscored: true,
+  tableName: 'classes',
 })
-export class Class extends Model<Class, IClassCreationAttributes> {
+export class Class extends Model<IClassAttributes> implements IClassAttributes {
   @PrimaryKey
-  @Column({
-    field: 'class_id',
-  })
+  @Column({ type: DataType.INTEGER })
   classId: number;
 
-  @Column({
-    field: 'class_name',
-  })
+  @Column({ type: DataType.STRING })
   className: string;
 
-  @Column({
-    field: 'max_seats',
-  })
+  @Column({ type: DataType.INTEGER })
   maxSeats: number;
 
   @HasMany(() => Student)
-  students: Student[];
+  students?: Student[];
 }

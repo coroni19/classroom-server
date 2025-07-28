@@ -1,10 +1,10 @@
-import { Optional } from "sequelize";
+import { Optional } from 'sequelize';
 
 export interface IClassAttributes {
-classId: number,
-className: string,
-maxSeats: number,
+  classId: number;
+  className: string;
+  maxSeats: number;
 }
 
-export interface IClassCreationAttributes extends Optional<IClassAttributes, "classId"> {}
-
+export interface IClassCreationAttributes
+  extends Optional<IClassAttributes, 'classId'> {}

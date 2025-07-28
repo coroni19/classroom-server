@@ -8,19 +8,21 @@ import {
   IsNotEmpty,
   IsIdentityCard,
 } from 'class-validator';
+
 import {
   MAX_AGE,
-  MIN_AGE,
   IL_LOCAL,
   NAMES_MAX_LENGTH,
   VALID_STRING_REGEX,
+  MIN_POSITIVE_NUMBER,
 } from 'src/constants/validation.const';
+
 import { Column } from 'sequelize-typescript';
 
 export class CreateStudentDto {
   @IsString()
-  @IsIdentityCard(IL_LOCAL)
   @IsNotEmpty()
+  @IsIdentityCard(IL_LOCAL)
   studentId: string;
 
   @IsString()
@@ -33,14 +35,14 @@ export class CreateStudentDto {
   @MaxLength(NAMES_MAX_LENGTH)
   lastName: string;
 
-  @IsNumber()
-  @Min(MIN_AGE)
-  @Max(MAX_AGE)
   @Column
+  @IsNumber()
+  @Max(MAX_AGE)
+  @Min(MIN_POSITIVE_NUMBER)
   age: number;
 
   @IsString()
-  @Matches(VALID_STRING_REGEX)
   @IsNotEmpty()
+  @Matches(VALID_STRING_REGEX)
   profession: string;
 }
