@@ -10,4 +10,8 @@ RUN npm install pg --save --legacy-peer-deps
 
 COPY . . 
 
-CMD ["npm", "run", "dev"]
+RUN npm run build
+
+USER node
+
+CMD ["npm", "run", "start:prod"]
