@@ -6,7 +6,7 @@ async function bootstrap() {
   const cors = require('cors');
 
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('roni/api');
+  app.setGlobalPrefix(process.env.BASENAME_PREFIX ?? '');
 
   app.use(cors());
 
