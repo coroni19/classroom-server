@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ClassRepository } from './class.repository';
-import { DatabaseModule } from '../../DB/database.module';
 import { ClassService } from 'src/modules/classes/class.service';
+import { DatabaseModule } from '../../config/database/database.module';
 import { ClassController } from 'src/modules/classes/class.controller';
 
 @Module({

@@ -1,22 +1,17 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
-import { DatabaseModule } from './DB/database.module';
+import { JoiModule } from './config/joi/joi.module';
 import { ClassModule } from './modules/classes/class.module';
-import { validationSchema } from './config/DBValidation.config';
 import { StudentModule } from './modules/students/student.module';
+import { DatabaseModule } from './config/database/database.module';
 
 @Module({
   imports: [
     ClassModule,
     StudentModule,
     DatabaseModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: '.env',
-      validationSchema
-    }),
+    JoiModule
   ],
   providers: [AppService],
   controllers: [AppController],
