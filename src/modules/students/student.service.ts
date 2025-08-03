@@ -13,12 +13,6 @@ export class StudentService {
   }
 
   async deleteStudent(studentId: string): Promise<void> {
-    const student = await this.studentRepository.findStudentById(studentId);
-
-    if (!student) {
-      throw new ItemDoesntExistException('Student', studentId);
-    }
-
     await this.studentRepository.deleteStudent(studentId);
   }
 
@@ -33,12 +27,12 @@ export class StudentService {
   }
 
   async assignClass(studentId: string, classId: number): Promise<void> {
-     const student = await this.studentRepository.findStudentById(studentId);
+    const student = await this.studentRepository.findStudentById(studentId);
 
     if (!student) {
-      throw new ItemDoesntExistException('Student', studentId)
+      throw new ItemDoesntExistException('Student', studentId);
     }
-    
+
     await this.studentRepository.assignClass(studentId, classId);
   }
 

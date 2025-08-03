@@ -4,7 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const cors = require('cors');
-
+  
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix(process.env.BASENAME_PREFIX ?? '');
 

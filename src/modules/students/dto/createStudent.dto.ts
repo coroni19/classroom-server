@@ -17,8 +17,6 @@ import {
   MIN_POSITIVE_NUMBER,
 } from 'src/constants/validation.const';
 
-import { Column } from 'sequelize-typescript';
-
 export class CreateStudentDto {
   @IsString()
   @IsNotEmpty()
@@ -35,7 +33,6 @@ export class CreateStudentDto {
   @MaxLength(NAMES_MAX_LENGTH)
   lastName: string;
 
-  @Column
   @IsNumber()
   @Max(MAX_AGE)
   @Min(MIN_POSITIVE_NUMBER)
