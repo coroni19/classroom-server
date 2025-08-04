@@ -1,16 +1,16 @@
 import { Optional } from 'sequelize';
 
-export interface IStudentAttributes {
+export interface IStudent {
+  age: number;
+  lastName: string;
   studentId: string;
   firstName: string;
-  lastName: string;
-  age: number;
   profession: string;
   classId: number | null;
 }
 
 export interface IStudentCreationAttributes
-  extends Optional<IStudentAttributes, 'studentId'> {}
+  extends Optional<IStudent, 'studentId'> {}
 
 export interface IstudentsInClassAttributes {
   classId: number;

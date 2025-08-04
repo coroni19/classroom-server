@@ -1,7 +1,7 @@
 import { CreateClassDto } from './dto/createClass.dto';
 import { ClassService } from 'src/modules/classes/class.service';
 import { Class } from 'src/modules/classes/entities/class.entity';
-import { PrimaryKeyException } from 'src/exceptions/PrimaryKey.exception';
+import { PrimaryKeyException } from 'src/exceptions/primary-key.exception';
 import { Get, Body, Post, Param, Delete, Controller } from '@nestjs/common';
 
 @Controller('classes')

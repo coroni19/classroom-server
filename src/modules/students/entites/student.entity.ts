@@ -9,17 +9,14 @@ import {
 } from 'sequelize-typescript';
 
 import { Class } from '../../classes/entities/class.entity';
-import { IStudentAttributes } from '../interfaces/student.interface';
+import { IStudent } from '../interfaces/student.interface';
 
 @Table({
   timestamps: false,
   underscored: true,
   tableName: 'students',
 })
-export class Student
-  extends Model<IStudentAttributes>
-  implements IStudentAttributes
-{
+export class Student extends Model<IStudent> implements IStudent {
   @PrimaryKey
   @Column({ type: DataType.STRING })
   studentId: string;

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { StudentRepository } from './student.repository';
 import { CreateStudentDto } from './dto/createStudent.dto';
 import { Student } from 'src/modules/students/entites/student.entity';
-import { ItemDoesntExistException } from 'src/exceptions/ItemDoesntExist.exception';
+import { ItemDoesntExistException } from 'src/exceptions/item-doesnt-exist.exception';
 
 @Injectable()
 export class StudentService {

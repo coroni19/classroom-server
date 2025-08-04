@@ -1,10 +1,11 @@
 import { Provider } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
+import { ProviderNames } from 'src/constants/providers-names';
 import { Class } from '../../modules/classes/entities/class.entity';
 import { Student } from '../../modules/students/entites/student.entity';
 
 export const DatabaseProvider: Provider = {
-  provide: 'SEQUELIZE',
+  provide: ProviderNames.SEQUELIZE,
   useFactory: async () => {
     const sequelize = new Sequelize({
       dialect: 'postgres',

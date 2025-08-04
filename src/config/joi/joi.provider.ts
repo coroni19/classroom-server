@@ -2,9 +2,10 @@ import 'dotenv/config';
 import * as Joi from '@hapi/joi';
 import { Provider } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ProviderNames } from 'src/constants/providers-names';
 
 export const JoiProvider: Provider = {
-  provide: 'JOI',
+  provide: ProviderNames.JOI,
   useFactory: async () => {
     const envValidation = Joi.object({
       DB_HOST: Joi.string().required(),

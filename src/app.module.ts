@@ -7,12 +7,7 @@ import { StudentModule } from './modules/students/student.module';
 import { DatabaseModule } from './config/database/database.module';
 
 @Module({
-  imports: [
-    ClassModule,
-    StudentModule,
-    DatabaseModule,
-    JoiModule
-  ],
+  imports: [JoiModule, ClassModule, StudentModule, DatabaseModule],
   providers: [AppService],
   controllers: [AppController],
 })

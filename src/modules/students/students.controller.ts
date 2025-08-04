@@ -12,7 +12,7 @@ import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/createStudent.dto';
 import { AssignStduentToClassDto } from './dto/updateStudent.dto';
 import { Student } from 'src/modules/students/entites/student.entity';
-import { PrimaryKeyException } from 'src/exceptions/PrimaryKey.exception';
+import { PrimaryKeyException } from 'src/exceptions/primary-key.exception';
 
 @Controller('students')
 export class StudentController {
